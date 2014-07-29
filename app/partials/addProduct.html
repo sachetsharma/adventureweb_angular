@@ -1,0 +1,57 @@
+﻿<div >
+    <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+    <div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
+    <form name="productForm" novalidate role="form">
+        <div class="form-group">
+            <label for="productName">Product Name</label>
+            <span class="label label-danger" data-ng-show="submitted && productForm.productName.$error.required">Required!</span>
+            <input type="text" name="productName" data-ng-model="product.Name" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="productNumber">Product Number</label>
+            <span class="label label-danger" data-ng-show="submitted && productForm.productNumber.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="submitted && productForm.$error.productNumber">Invalid productNumber!</span>
+            <input type="text" name="productNumber" data-ng-model="product.ProductNumber" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="makeFlag">Make Flag</label>
+            <input type="checkbox" name="makeFlag" data-ng-model="product.MakeFlag" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="finishedGoodsFlag">Make Flag</label>
+            <input type="checkbox" name="finishedGoodsFlag" data-ng-model="product.FinishedGoodsFlag" class="form-control" />
+        </div>
+       
+        <div class="form-group">
+            <label for="safetyStockLevel">Safety Stock Level</label>
+            <span class="label label-danger" data-ng-show="submitted && productForm.safetyStockLevel.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="submitted && productForm.safetyStockLevel.$error.number">Invalid safetyStockLevel!</span>
+            <input name="safetyStockLevel" data-ng-model="product.SafetyStockLevel" type="number" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="daysToManufacture">Days To Manufacture</label>
+            <span class="label label-danger" data-ng-show="submitted && productForm.daysToManufacture.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="submitted && productForm.daysToManufacture.$error.number">Invalid daysToManufacture!</span>
+            <input name="daysToManufacture" data-ng-model="product.DaysToManufacture" type="number" class="form-control" required />
+        </div>
+
+
+        <div class="form-group">
+            <label for="sellStartDate">Sell Start Date</label>
+            <span class="label label-danger" data-ng-show="submitted && productForm.sellStartDate.$error.required">Required!</span>
+            <input name="sellStartDate" data-ng-model="product.SellStartDate" type="date" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="modifiedDate">Modified Date</label>
+            <span class="label label-danger" data-ng-show="submitted && productForm.sellStartDate.$error.required">Required!</span>
+            <input name="modifiedDate" data-ng-model="product.ModifiedDate" type="date" class="form-control" required />
+        </div>
+
+        <button data-ng-disabled="progress.active()" data-ng-click="submitProduct(productForm)" class="btn btn-default">Submit</button>
+    </form>
+</div>

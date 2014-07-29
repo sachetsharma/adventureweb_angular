@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myapp">
+<head>
+    <title></title>
+
+    <script src="/libs/angular/angular.js"></script>
+    <script src="/libs/angular/ui-router.js"></script>
+    <link href="../Content/Site.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <script src="scripts/app.js"></script>
+    <style type="text/css">
+        .entity-list {
+            position: absolute;
+            left: 5px;
+            width: 200px;
+            top: 10px;
+            height: 900px;
+            overflow: auto;
+        }
+
+        .entity-data {
+            position: absolute;
+            left: 210px;
+            top: 10px;
+            right:5px;
+            height: 900px;
+            overflow: auto;
+        }
+
+    </style>
+</head>
+<body ng-controller="appController">
+    <div class="entity-list">
+        <ul>
+            <li ng-repeat="entity in entities">
+                <a href="#/entity/{{entity.name}}">{{entity.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div ui-view class="entity-data"></div>
+   
+</body>
+</html>

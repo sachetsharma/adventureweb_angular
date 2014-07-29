@@ -1,0 +1,17 @@
+﻿<table cellpadding="2"  border="1">
+    <thead>
+        <tr>
+            <th ng-repeat="(key,data) in entityData[0]" ng-switch="key.indexOf('ID')">
+                <span ng-switch-when="-1">{{key}}</span>
+                <span ng-switch-default>
+                    <a href="#/entity/{{key.replace('ID','')}}">{{key}}</a>
+                </span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="entity in entityData">
+            <td ng-repeat="(key,data) in entity">{{data}}</td>
+        </tr>
+    </tbody>
+</table>
