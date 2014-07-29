@@ -1,56 +1,46 @@
 'use strict';
 
-describe('notesFactory tests', function (){
-  var factory;
-  
-  //excuted before each "it" is run.
-  beforeEach(function (){
-    
-    //load the module.
-    module('todoApp');
-    
-    //inject your factory for testing.
-    inject(function(notesFactory) {
-      factory = notesFactory;
-    });
-	
-	  var store = {todo1:'test1',todo2:'test2',todo3:'test3'};
+describe('entityService tests', function (){
+  var service;
+  var httpBackend;
 
-	  spyOn(localStorage, 'getItem').andCallFake(function (key) {
-		  return store[key];
-	  });
-	  spyOn(localStorage, 'setItem').andCallFake(function (key, value) {
-		  return store[key] = value + '';
-	  });
-	  spyOn(localStorage, 'clear').andCallFake(function () {
-		  store = {};
-	  });
-    spyOn(Object, 'keys').andCallFake(function (key) {
-  		var keys=[];
-  		for(var key in store)
-  			keys.push(key);
-  		return keys;
-	  });
+   beforeEach(module('adventureWebApp'));
+    beforeEach(inject(function(entityService,$httpBackend){
+        service = entityService;
+        httpBackend = $httpBackend;
+    }));
+  //executed before each "it" is run.
 
-  });
+    var mockData = {
+
+         data: [
+            {
+                "group": null,
+                "name": "AWBuildVersion",
+                "location": "/adventureweb/api/AWBuildVersion"
+            },
+            {
+                "group": null,
+                "name": "DatabaseLog",
+                "location": "/adventureweb/api/DatabaseLog"
+            }]
+
+    };
      
   //check to see if it has the expected function
-  it('should have a get function', function () { 
-    expect(angular.isFunction(factory.get)).toBe(true);
-    expect(angular.isFunction(factory.put)).toBe(true);
+  it('check functions', function () {
+    expect(angular.isFunction(service.getEntitiesList)).toBe(true);
+    expect(angular.isFunction(service.getEntityData)).toBe(true);
   });
   
   //check to see if it returns 3 notes initially
-  it('should return 3 todo notes initially', function (){
-    var result = factory.get();
-    expect(result.length).toBe(3);
+  it('should return 2 items initially', function (){
+    httpBackend.whenGET("http://localhost/adventureweb/api/apilist").respond(mockData);
+      service.getEntitiesList().then(function(d){
+          expect(d.data).length.toBe(2);
+      });
   });
-  
-  //check if it successfully adds a new item
-  it('should return 4 todo notes after adding one more', function (){
-    factory.put('Angular is awesome');
-	  var result = factory.get();
-    expect(result.length).toBe(4);
-  });
+
+
 
 });
